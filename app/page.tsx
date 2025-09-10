@@ -1,6 +1,6 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import Quiz from '@/components/Quiz'
+import ActivityPicker from '@/components/ActivityPicker'
 import Hero from '@/components/Hero'
 import { Card, CardBody } from '@/components/ui/Card'
 import Container from '@/components/Container'
@@ -47,8 +47,8 @@ export default async function HomePage() {
             ))}
           </div>
         </section>
-        <section id="quiz">
-          <Quiz />
+        <section id="activity">
+          <ActivityPicker />
         </section>
         </Container>
       </main>

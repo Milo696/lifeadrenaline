@@ -9,7 +9,7 @@ export default function Hero() {
         <p className="mt-3 text-gray-200/90">Success, risk, adventures, and entertainment — no fluff.</p>
         <div className="mt-5 flex gap-3">
           <Link href="/blog"><button className="btn-gradient px-5 py-2 text-sm">Read the blog</button></Link>
-          <Link href="#quiz"><button className="btn-gradient px-5 py-2 text-sm" style={{filter:'brightness(0.95)'}}>Take the quiz</button></Link>
+          <Link href="#activity"><button className="btn-gradient px-5 py-2 text-sm" style={{filter:'brightness(0.95)'}}>Suggest an activity</button></Link>
         </div>
       </div>
     </section>
