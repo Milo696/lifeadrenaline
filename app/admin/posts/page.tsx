@@ -1,13 +1,26 @@
-import { getSupabaseServer } from '@/lib/supabase/server'
+"use client"
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { supabaseBrowser } from '@/lib/supabase/client'
+import { useRouter } from 'next/navigation'
 
-export default async function PostsAdminPage() {
-  const supabase = getSupabaseServer()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/admin/login')
+export default function PostsAdminPage() {
+  const router = useRouter()
+  const [posts, setPosts] = useState<any[]>([])
 
-  const { data: posts } = await supabase.from('posts').select('id,title,created_at').order('created_at', { ascending: false })
+  useEffect(() => {
+    (async () => {
+      const { data: { user } } = await supabaseBrowser.auth.getUser()
+      if (!user) return router.replace('/admin/login')
+      const { data } = await supabaseBrowser.from('posts').select('id,title,created_at').order('created_at', { ascending: false })
+      setPosts(data || [])
+    })()
+  }, [router])
+
+  const del = async (id: string) => {
+    await supabaseBrowser.from('posts').delete().eq('id', id)
+    setPosts(list => list.filter(p => p.id !== id))
+  }
 
   return (
     <div>
@@ -16,7 +29,7 @@ export default async function PostsAdminPage() {
         <Link href="/admin/posts/new" className="rounded bg-black text-white px-3 py-2 text-sm">New</Link>
       </div>
       <ul className="divide-y rounded border">
-        {posts?.map(p => (
+        {posts.map(p => (
           <li key={p.id} className="flex items-center justify-between px-4 py-3">
             <div>
               <div className="font-medium">{p.title}</div>
@@ -24,9 +37,7 @@ export default async function PostsAdminPage() {
             </div>
             <div className="flex gap-3 text-sm">
               <Link href={`/admin/posts/${p.id}/edit`} className="underline">Edit</Link>
-              <form action={async () => { 'use server'; await supabase.from('posts').delete().eq('id', p.id) }}>
-                <button className="text-red-600">Delete</button>
-              </form>
+              <button onClick={() => del(p.id)} className="text-red-600">Delete</button>
             </div>
           </li>
         ))}

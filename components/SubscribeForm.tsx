@@ -28,8 +28,8 @@ export default function SubscribeForm() {
 
   return (
     <form onSubmit={submit} className="flex gap-2">
-      <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Ваш email" className="w-full rounded border p-2 text-sm" />
-      <button disabled={loading} className="rounded bg-black text-white px-3 text-sm">Подписаться</button>
+      <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Your email" className="w-full rounded border p-2 text-sm" />
+      <button disabled={loading} className="rounded bg-black text-white px-3 text-sm">Subscribe</button>
       {ok && <span className="text-green-600 text-sm">Готово</span>}
       {err && <span className="text-red-600 text-sm">{err}</span>}
     </form>

@@ -3,13 +3,13 @@ import Link from 'next/link'
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden rounded-2xl border bg-gradient-to-br from-brand-50 to-white p-8">
+    <section className="relative overflow-hidden rounded-2xl border border-[#8B7F45]/30 bg-white/5 p-8 card-modern">
       <div className="max-w-2xl">
-        <h1 className="text-4xl font-bold tracking-tight">LifeAdrenaline</h1>
-        <p className="mt-3 text-gray-700">Успех, риск, приключения и развлечения — без воды.</p>
+        <h1 className="heading text-5xl font-extrabold tracking-tight">ThrillHub</h1>
+        <p className="mt-3 text-gray-200/90">Success, risk, adventures, and entertainment — no fluff.</p>
         <div className="mt-5 flex gap-3">
-          <Link href="/blog"><Button variant="brand">Читать блог</Button></Link>
-          <Link href="#quiz"><Button variant="outline">Пройти квиз</Button></Link>
+          <Link href="/blog"><button className="btn-gradient px-5 py-2 text-sm">Read the blog</button></Link>
+          <Link href="#quiz"><button className="btn-gradient px-5 py-2 text-sm" style={{filter:'brightness(0.95)'}}>Take the quiz</button></Link>
         </div>
       </div>
     </section>

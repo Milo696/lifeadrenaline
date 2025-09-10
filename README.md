@@ -1,4 +1,4 @@
-# LifeAdrenaline
+# ThrillHub
 
 Full-stack Next.js (App Router) lifestyle blog with Supabase (auth, Postgres, storage) and Tailwind CSS. Admin dashboard for posts and categories. Affiliate HTML supported in posts.
 

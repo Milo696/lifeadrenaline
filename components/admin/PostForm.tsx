@@ -23,10 +23,19 @@ export default function PostForm({ categories, post }: { categories: { id: strin
     try {
       let featuredUrl = post?.featured_image ?? ''
       if (image) {
-        const filePath = `${Date.now()}-${image.name}`
-        const { error: upErr } = await supabaseBrowser.storage.from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET || 'images').upload(filePath, image)
+        const bucket = process.env.NEXT_PUBLIC_SUPABASE_BUCKET || 'images'
+        const ext = (image.name.split('.').pop() || 'bin').toLowerCase()
+        const safeBase = image.name
+          .replace(/\.[^/.]+$/, '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+        const filePath = `posts/${Date.now()}-${Math.random().toString(36).slice(2,8)}-${safeBase}.${ext}`
+        const { error: upErr } = await supabaseBrowser.storage
+          .from(bucket)
+          .upload(filePath, image, { cacheControl: '3600', upsert: false, contentType: image.type })
         if (upErr) throw upErr
-        const { data: { publicUrl } } = supabaseBrowser.storage.from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET || 'images').getPublicUrl(filePath)
+        const { data: { publicUrl } } = supabaseBrowser.storage.from(bucket).getPublicUrl(filePath)
         featuredUrl = publicUrl
       }
 

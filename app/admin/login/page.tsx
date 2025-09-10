@@ -27,7 +27,7 @@ export default function LoginPage() {
         {error && <div className="text-sm text-red-600">{error}</div>}
         <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="Email" className="w-full rounded border p-2" required />
         <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" className="w-full rounded border p-2" required />
-        <button disabled={loading} className="w-full rounded bg-black text-white py-2 disabled:opacity-50">Войти</button>
+        <button disabled={loading} className="w-full rounded bg-black text-white py-2 disabled:opacity-50">Sign in</button>
       </form>
     </div>
   )

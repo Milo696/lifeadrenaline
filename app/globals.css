@@ -11,15 +11,28 @@
   --space-6: 24px;
 }
 
+.adrenaline-bg {
+  background: linear-gradient(180deg, #1A2A44 0%, #0D0D0D 100%);
+}
+
+/* Fonts */
+html, body {
+  font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+h1, h2, h3, .heading {
+  font-family: 'Montserrat', Poppins, ui-sans-serif, system-ui;
+}
+
 .card {
   border-radius: var(--radius);
 }
 
-html, body {
-  height: 100%;
-}
+/* Do NOT lock html/body height; allow body to grow with content so gradient stretches */
 
-a { @apply text-brand-700 hover:text-brand-900 underline; }
+.prose a { text-decoration: underline; color: #D4AF37; }
+a { text-decoration: none; color: #e5e7eb; }
+a:hover { color: #D4AF37; }
+a:visited { color: #e5e7eb; }
 
 /* Prose overrides */
 .prose img { @apply rounded-md; }
@@ -32,5 +45,89 @@ a { @apply text-brand-700 hover:text-brand-900 underline; }
 .affiliate img { filter: var(--affiliate-img-filter, none); }
 .dark .affiliate img { --affiliate-img-filter: brightness(0.9) contrast(1.05); }
 .dark .affiliate iframe { filter: brightness(0.9) contrast(1.05); }
+
+/* Iframe banners responsive */
+.banner iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+  border: 0;
+}
+.banner { display: flex; justify-content: center; align-items: center; }
+.banner > * { max-width: 100%; }
+.banner img, .banner video { width: 100% !important; height: auto !important; display: block; object-fit: contain; }
+.banner .responsive-iframe {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+.banner .responsive-iframe > iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+
+/* Cards */
+.card-modern {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.card-modern:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+
+/* Buttons gradient */
+.btn-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+  color: #0b0b0b;
+  border-radius: 10px;
+  box-shadow: 0 8px 22px rgba(212, 175, 55, 0.35);
+  transition: filter .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.btn-gradient:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 10px 28px rgba(212, 175, 55, 0.45); }
+
+/* Logo animation */
+.pulse-slow { animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity:.9 } 50% { opacity:1 } }
+
+/* Post hero and card */
+.post-hero {
+  background: radial-gradient(1200px 300px at 20% -40%, rgba(212,175,55,0.18), transparent 60%),
+              linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(212,175,55,0.22);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.post-hero h1 {
+  letter-spacing: -0.02em;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.1;
+}
+.post-meta { color: #cbd5e1; font-size: 12px; display: flex; gap: 8px; align-items: center; }
+.chip { border: 1px solid rgba(212,175,55,0.35); color: #e7e5c7; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+.post-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+}
+
+/* Prose enhancements */
+.post-content.prose { word-break: break-word; overflow-wrap: anywhere; }
+.post-content.prose img { max-width: 100%; height: auto; }
+.post-content.prose a { word-break: break-all; }
+.post-content.prose pre, .post-content.prose code { white-space: pre-wrap; word-break: break-word; }
+.post-content.prose h2 { position: relative; padding-bottom: 6px; }
+.post-content.prose h2::after {
+  content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 72px;
+  background: linear-gradient(90deg, #D4AF37, transparent);
+}
+.post-content.prose p:first-of-type { font-size: 1.125rem; line-height: 1.95rem; opacity: 0.95; }
+.post-content.prose blockquote {
+  border-left: 3px solid rgba(212,175,55,0.6);
+  background: rgba(255,255,255,0.03);
+  padding: 12px 16px; border-radius: 8px;
+}
 
 

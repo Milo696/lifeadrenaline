@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { ChipLink } from '@/components/ui/Chips'
 import { Card, CardBody, CardMedia } from '@/components/ui/Card'
 import { getSupabaseServer } from '@/lib/supabase/server'
+import Container from '@/components/Container'
 
 export const dynamic = 'force-dynamic'
 
@@ -21,14 +22,15 @@ export default async function BlogList({ searchParams }: { searchParams?: { cate
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+      <main>
+        <Container className="py-8">
         <div className="mb-6 flex gap-2 overflow-x-auto">
           <ChipLink href="/blog" active={!searchParams?.category}>Все</ChipLink>
           {categories?.map(c => (
             <ChipLink key={c.id} href={`/blog?category=${encodeURIComponent(c.name)}`} active={searchParams?.category === c.name}>{c.name}</ChipLink>
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {posts?.map(p => (
             <Link key={p.id} href={`/blog/${p.id}`} className="block group">
               <Card>
@@ -44,6 +46,7 @@ export default async function BlogList({ searchParams }: { searchParams?: { cate
             </Link>
           ))}
         </div>
+        </Container>
       </main>
       <Footer />
     </div>

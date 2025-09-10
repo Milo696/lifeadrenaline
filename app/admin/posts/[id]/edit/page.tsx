@@ -1,19 +1,33 @@
-import { getSupabaseServer } from '@/lib/supabase/server'
+"use client"
 import PostForm from '@/components/admin/PostForm'
-import { redirect } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { supabaseBrowser } from '@/lib/supabase/client'
+import { useRouter } from 'next/navigation'
 
-export default async function EditPostPage({ params }: { params: { id: string } }) {
-  const supabase = getSupabaseServer()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/admin/login')
+export default function EditPostPage({ params }: { params: { id: string } }) {
+  const router = useRouter()
+  const [categories, setCategories] = useState<any[]>([])
+  const [post, setPost] = useState<any>(null)
 
-  const { data: categories } = await supabase.from('categories').select('id,name')
-  const { data: post } = await supabase.from('posts').select('*').eq('id', params.id).single()
+  useEffect(() => {
+    (async () => {
+      const { data: { user } } = await supabaseBrowser.auth.getUser()
+      if (!user) return router.replace('/admin/login')
+      const [{ data: cats }, { data: p }] = await Promise.all([
+        supabaseBrowser.from('categories').select('id,name'),
+        supabaseBrowser.from('posts').select('*').eq('id', params.id).single()
+      ])
+      setCategories(cats || [])
+      setPost(p)
+    })()
+  }, [router, params.id])
+
+  if (!post) return <div>Загрузка...</div>
 
   return (
     <div>
       <h1 className="text-2xl font-semibold mb-4">Edit Post</h1>
-      <PostForm categories={categories ?? []} post={post} />
+      <PostForm categories={categories} post={post} />
     </div>
   )
 }

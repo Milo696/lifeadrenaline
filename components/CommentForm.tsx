@@ -30,9 +30,9 @@ export default function CommentForm({ postId }: { postId: string }) {
   return (
     <form onSubmit={submit} className="mt-4 space-y-2">
       {error && <div className="text-sm text-red-600">{error}</div>}
-      {ok && <div className="text-sm text-green-600">Комментарий добавлен (обновите страницу).</div>}
-      <textarea value={text} onChange={e => setText(e.target.value)} className="w-full rounded border p-2" placeholder="Ваш комментарий" required />
-      <button disabled={loading} className="rounded bg-black text-white px-3 py-2 text-sm disabled:opacity-50">Отправить</button>
+      {ok && <div className="text-sm text-green-600">Comment added (refresh to see it).</div>}
+      <textarea value={text} onChange={e => setText(e.target.value)} className="w-full rounded border p-2" placeholder="Your comment" required />
+      <button disabled={loading} className="rounded bg-black text-white px-3 py-2 text-sm disabled:opacity-50">Send</button>
     </form>
   )
 }

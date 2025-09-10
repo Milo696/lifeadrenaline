@@ -7,7 +7,7 @@ export function Card({ className, children }: React.PropsWithChildren<{ classNam
 
 export function CardMedia({ src, alt, srcDark }: { src?: string; srcDark?: string; alt?: string }) {
   if (!src && !srcDark) return null
-  return <ThemedImage lightSrc={src} darkSrc={srcDark} alt={alt} className="h-48 w-full rounded-t-[var(--radius)] object-cover" />
+  return <ThemedImage lightSrc={src} darkSrc={srcDark} alt={alt} className="h-40 sm:h-48 w-full rounded-t-[var(--radius)] object-cover" />
 }
 
 export function CardBody({ className, children }: React.PropsWithChildren<{ className?: string }>) {
