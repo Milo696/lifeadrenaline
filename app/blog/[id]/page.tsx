@@ -22,17 +22,22 @@ import {
 import { Button } from '@/components/components/ui/button'
 import CommentForm from '@/components/CommentForm'
 import type { Metadata } from 'next'
+import { extractMetaTags } from '@/lib/content-parser'
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const supabase = getSupabaseServer()
-  const { data: post } = await supabase.from('posts').select('title,excerpt,featured_image,category').eq('id', params.id).single()
+  const { data: post } = await supabase.from('posts').select('title,excerpt,content,featured_image,category').eq('id', params.id).single()
   if (!post) return { title: 'Post not found' }
+  
+  // Extract meta tags from content
+  const { title: contentTitle, description: contentDesc } = extractMetaTags(post.content || '')
+  
   return {
-    title: post.title,
-    description: post.excerpt || `${post.title} - ${post.category} ideas for home`,
+    title: contentTitle || post.title,
+    description: contentDesc || post.excerpt || `${post.title} - ${post.category} ideas for home`,
     openGraph: {
-      title: post.title,
-      description: post.excerpt || `${post.title} - ${post.category} ideas for home`,
+      title: contentTitle || post.title,
+      description: contentDesc || post.excerpt || `${post.title} - ${post.category} ideas for home`,
       images: post.featured_image ? [{ url: post.featured_image }] : undefined,
       type: 'article'
     }
@@ -96,8 +101,18 @@ export default async function PostPage({ params }: { params: { id: string } }) {
             )}
             <AnimateIn delay={0.1}>
               <div className="post-card post-content prose prose-invert lg:prose-lg" style={{background:'rgba(244,237,225,0.06)'}}>
-                <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSlug, rehypeAutolinkHeadings]}>
-                  {post.content}
+                <ReactMarkdown 
+                  remarkPlugins={[remarkGfm]} 
+                  rehypePlugins={[rehypeRaw, rehypeSlug, rehypeAutolinkHeadings]}
+                  components={{
+                    a: ({ href, children, ...props }) => (
+                      <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                        {children}
+                      </a>
+                    )
+                  }}
+                >
+                  {extractMetaTags(post.content || '').cleanContent}
                 </ReactMarkdown>
               </div>
             </AnimateIn>
