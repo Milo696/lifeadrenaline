@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ActivityPicker from '@/components/ActivityPicker'
+import Section from '@/components/Section'
 import Hero from '@/components/Hero'
 import { Card, CardBody } from '@/components/ui/Card'
 import Container from '@/components/Container'
@@ -27,10 +28,10 @@ export default async function HomePage() {
         <section className="mb-12">
           <Hero />
         </section>
-        <section className="mb-12">
+        <Section className="mb-10">
           {/* Top banner zone: single or row of three */}
           <BannerRow slot="home_top" className="mb-6" />
-          <h2 className="text-2xl font-semibold mb-4">Featured articles</h2>
+          <h2 className="text-2xl font-semibold mb-4">Featured ideas for a cozy day</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {posts?.map((p) => (
               <Link key={p.id} href={`/blog/${p.id}`} className="block group">
@@ -46,10 +47,10 @@ export default async function HomePage() {
               </Link>
             ))}
           </div>
-        </section>
-        <section id="activity">
+        </Section>
+        <Section id="activity" title="Not sure what to do?">
           <ActivityPicker />
-        </section>
+        </Section>
         </Container>
       </main>
       <Footer />
