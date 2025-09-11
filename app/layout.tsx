@@ -27,8 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather:wght@300;400;500&display=swap" rel="stylesheet" />
       </head>
-      <body className={`min-h-screen min-w-full antialiased bg-gradient-to-b from-[#F5E8C7] to-[#8B5A2B] text-[#2b1e16]`}> 
-        <ThemeProvider attribute="class" forcedTheme="light" defaultTheme="light" enableSystem={false}>
+      <body className={`min-h-screen min-w-full antialiased bg-gradient-to-b from-[#2d1b0f] to-[#1a0e08] text-[#f4ede1]`}> 
+        <ThemeProvider attribute="class" forcedTheme="dark" defaultTheme="dark" enableSystem={false}>
           {children}
           <Toaster />
         </ThemeProvider>
