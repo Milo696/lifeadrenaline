@@ -3,13 +3,13 @@ import Link from 'next/link'
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden rounded-2xl border border-[#8B7F45]/30 bg-white/5 p-8 card-modern">
+    <section className="relative overflow-hidden rounded-2xl border border-[var(--border-warm)] bg-[var(--paper)] p-8 card-modern animate-fade">
       <div className="max-w-2xl">
-        <h1 className="heading text-5xl font-extrabold tracking-tight">ThrillHub</h1>
-        <p className="mt-3 text-gray-200/90">Success, risk, adventures, and entertainment — no fluff.</p>
+        <h1 className="heading font-lora text-5xl font-extrabold tracking-tight">ThrillHub</h1>
+        <p className="mt-3 font-merriweather text-[#2b1e16] opacity-90">Warm ideas to make staying home feel inspiring and cozy.</p>
         <div className="mt-5 flex gap-3">
-          <Link href="/blog"><button className="btn-gradient px-5 py-2 text-sm">Read the blog</button></Link>
-          <Link href="#activity"><button className="btn-gradient px-5 py-2 text-sm" style={{filter:'brightness(0.95)'}}>Suggest an activity</button></Link>
+          <Link href="/blog"><button className="bg-gradient-to-r from-[#D97904] to-[#F4A261] text-white font-semibold py-2 px-4 rounded-lg shadow-md animate-bob transition-all duration-200">Read the blog</button></Link>
+          <Link href="#activity"><button className="bg-gradient-to-r from-[#D97904] to-[#F4A261] text-white font-semibold py-2 px-4 rounded-lg shadow-md animate-bob transition-all duration-200">Suggest an activity</button></Link>
         </div>
       </div>
     </section>

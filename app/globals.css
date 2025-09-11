@@ -29,11 +29,15 @@
 
 /* Fonts */
 html, body {
-  font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Merriweather', Georgia, ui-serif, serif;
 }
 h1, h2, h3, .heading {
-  font-family: 'Montserrat', Poppins, ui-sans-serif, system-ui;
+  font-family: 'Lora', ui-serif, Georgia, serif;
 }
+
+/* Font utilities */
+.font-lora { font-family: 'Lora', ui-serif, Georgia, serif; }
+.font-merriweather { font-family: 'Merriweather', Georgia, ui-serif, serif; }
 
 .card {
   border-radius: var(--radius);
@@ -52,6 +56,14 @@ a:visited { color: #e8e3da; }
 /* Animations */
 .fade-in { animation: fadeIn 0.35s ease-out both; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Simple fade utility (opacity transition) */
+.animate-fade { animation: fadeOpacity .5s ease forwards; }
+@keyframes fadeOpacity { from { opacity: 0 } to { opacity: 1 } }
+
+/* Bob hover for buttons */
+@keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+.animate-bob:hover { animation: bob .5s ease-in-out; }
 
 /* Affiliate embeds - dark mode helpers */
 .affiliate img { filter: var(--affiliate-img-filter, none); }

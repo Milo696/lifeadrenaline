@@ -25,9 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather:wght@300;400;500&display=swap" rel="stylesheet" />
       </head>
-      <body className={`min-h-screen min-w-full text-gray-100 antialiased adrenaline-bg`}> 
+      <body className={`min-h-screen min-w-full antialiased bg-gradient-to-b from-[#F5E8C7] to-[#8B5A2B] text-[#2b1e16]`}> 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
           <Toaster />
