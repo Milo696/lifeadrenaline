@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import ThemeToggle from '@/components/ThemeToggle'
 import Container from './Container'
 import AdrenalineLogo from './Logo'
 import {
@@ -36,7 +35,6 @@ export default function Header() {
           </NavigationMenu>
         </div>
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>

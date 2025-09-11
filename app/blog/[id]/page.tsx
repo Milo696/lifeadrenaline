@@ -63,7 +63,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
             </AnimateIn>
             <AnimateIn>
               <div className="post-hero gold-glow mb-6">
-                <h1 className="heading text-4xl sm:text-5xl font-extrabold">{post.title}</h1>
+                <h1 className="heading text-4xl sm:text-6xl leading-tight font-extrabold">{post.title}</h1>
                 <div className="post-meta mt-2">
                   <span className="chip">{post.category}</span>
                   {post.created_at && <span>{new Date(post.created_at).toLocaleDateString()}</span>}
@@ -78,7 +78,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
               </AnimateIn>
             )}
             <AnimateIn delay={0.1}>
-              <div className="post-card post-content prose prose-invert lg:prose-lg">
+              <div className="post-card post-content prose lg:prose-lg" style={{background:'rgba(244,237,225,0.06)'}}>
                 <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSlug, rehypeAutolinkHeadings]}>
                   {post.content}
                 </ReactMarkdown>
