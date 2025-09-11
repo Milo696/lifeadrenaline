@@ -95,7 +95,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
                 <div className="mb-2 font-semibold">Try this at home</div>
                 <p className="text-sm text-gray-300 mb-4">Explore more ideas in “{post.category}” or let ThrillHub suggest a new activity.</p>
                 <div className="flex flex-wrap gap-2">
-                  <Button asChild variant="brand">
+                  <Button asChild variant="default" className="btn-gradient border-none">
                     <a href={`/blog?category=${encodeURIComponent(post.category || '')}`}>More in {post.category}</a>
                   </Button>
                   <Button asChild variant="outline">
