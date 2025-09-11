@@ -1,10 +1,5 @@
 "use client"
 import { useEffect, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import DOMPurify from 'dompurify'
 import { extractMetaTags } from '@/lib/content-parser'
 
@@ -17,20 +12,13 @@ export default function ContentRenderer({ content }: { content: string }) {
   
   const { cleanContent } = extractMetaTags(content)
   
-  // Always use ReactMarkdown with HTML support for mixed content
-  return (
-    <ReactMarkdown 
-      remarkPlugins={[remarkGfm]} 
-      rehypePlugins={[rehypeRaw, rehypeSlug, rehypeAutolinkHeadings]}
-      components={{
-        a: ({ href, children, ...props }) => (
-          <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
-            {children}
-          </a>
-        )
-      }}
-    >
-      {cleanContent}
-    </ReactMarkdown>
-  )
+  // Sanitize HTML and render directly
+  const sanitized = DOMPurify.sanitize(cleanContent, {
+    ALLOWED_TAGS: ['a', 'strong', 'em', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'br', 'img', 'blockquote', 'code', 'pre', 'span', 'div'],
+    ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'title', 'class', 'style'],
+    ADD_ATTR: ['target', 'rel'],
+    FORBID_ATTR: ['onclick', 'onerror', 'onload']
+  })
+  
+  return <div dangerouslySetInnerHTML={{ __html: sanitized }} />
 }

@@ -73,15 +73,20 @@ export default function PostForm({ categories, post }: { categories: { id: strin
           value={content} 
           onChange={e => setContent(e.target.value)} 
           className="w-full min-h-[400px] rounded border p-3 font-mono text-sm"
-          placeholder="# Your Title
+          placeholder="<title>Custom SEO Title Here</title>
+<meta name='description' content='Custom meta description for SEO'>
 
-Games, for example, can be a surprisingly effective way to combine excitement and focus.
+<h1>Your Post Title</h1>
+
+<p>Games, for example, can be a surprisingly effective way to combine excitement and focus.</p>
 
 <p>In fact, our project offers new players a <strong>welcome bonus of 500&nbsp;USDT 🎁</strong>.</p>
 
-<a href='https://bitxlucky.vip/?promo=START500' target='_blank'>🔥 Claim your 500&nbsp;USDT bonus here</a>
+<a href='https://bitxlucky.vip/?promo=START500' target='_blank' rel='noopener noreferrer'>🔥 Claim your 500&nbsp;USDT bonus here</a>
 
-## Gentle vs. Radical Detox"
+<h2>Gentle vs. Radical Detox</h2>
+
+<p>More content here...</p>"
         />
       </div>
       <div>
