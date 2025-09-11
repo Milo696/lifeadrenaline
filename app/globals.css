@@ -45,7 +45,18 @@ h1, h2, h3, .heading {
 
 /* Do NOT lock html/body height; allow body to grow with content so gradient stretches */
 
-.prose a { text-decoration: underline; color: var(--accent-amber); }
+/* Links in prose (post content) */
+.prose a { 
+  text-decoration: underline; 
+  color: var(--accent-amber); 
+  font-weight: 500;
+}
+.prose a:hover { 
+  color: var(--accent-coral); 
+  text-decoration: none; 
+}
+
+/* Global links */
 a { text-decoration: none; color: #e8e3da; }
 a:hover { color: var(--accent-amber); }
 a:visited { color: #e8e3da; }

@@ -21,6 +21,23 @@ import {
 } from '@/components/components/ui/breadcrumb'
 import { Button } from '@/components/components/ui/button'
 import CommentForm from '@/components/CommentForm'
+import type { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const supabase = getSupabaseServer()
+  const { data: post } = await supabase.from('posts').select('title,excerpt,featured_image,category').eq('id', params.id).single()
+  if (!post) return { title: 'Post not found' }
+  return {
+    title: post.title,
+    description: post.excerpt || `${post.title} - ${post.category} ideas for home`,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || `${post.title} - ${post.category} ideas for home`,
+      images: post.featured_image ? [{ url: post.featured_image }] : undefined,
+      type: 'article'
+    }
+  }
+}
 
 export default async function PostPage({ params }: { params: { id: string } }) {
   const supabase = getSupabaseServer()
