@@ -13,6 +13,7 @@ export default function PostForm({ categories, post }: { categories: { id: strin
   const [category, setCategory] = useState(post?.category ?? (categories[0]?.name || ''))
   const [image, setImage] = useState<File | null>(null)
   const [affiliateHtml, setAffiliateHtml] = useState(post?.affiliate_html ?? '')
+  const [bannerStyle, setBannerStyle] = useState(post?.banner_style ?? 'vertical')
   const [featured, setFeatured] = useState<boolean>(post?.featured ?? false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -42,11 +43,11 @@ export default function PostForm({ categories, post }: { categories: { id: strin
       }
 
       if (post?.id) {
-        const { error } = await supabaseBrowser.from('posts').update({ title, content, category, featured_image: featuredUrl, affiliate_html: affiliateHtml, featured }).eq('id', post.id)
+        const { error } = await supabaseBrowser.from('posts').update({ title, content, category, featured_image: featuredUrl, affiliate_html: affiliateHtml, banner_style: bannerStyle, featured }).eq('id', post.id)
         if (error) throw error
         toast({ title: 'Post updated', description: 'Changes saved successfully.' })
       } else {
-        const { error } = await supabaseBrowser.from('posts').insert({ title, content, category, featured_image: featuredUrl, affiliate_html: affiliateHtml, featured })
+        const { error } = await supabaseBrowser.from('posts').insert({ title, content, category, featured_image: featuredUrl, affiliate_html: affiliateHtml, banner_style: bannerStyle, featured })
         if (error) throw error
         toast({ title: 'Post created', description: 'Your post is published.' })
       }
@@ -73,7 +74,18 @@ export default function PostForm({ categories, post }: { categories: { id: strin
       </div>
       <div>
         <label className="block text-sm mb-1">Affiliate Banner HTML</label>
-        <textarea value={affiliateHtml} onChange={e => setAffiliateHtml(e.target.value)} className="w-full min-h-[100px] rounded border p-2" placeholder="<a href='...'>Bonus</a>"></textarea>
+        <textarea value={affiliateHtml} onChange={e => setAffiliateHtml(e.target.value)} className="w-full min-h-[100px] rounded border p-2" placeholder="<iframe src='...' width='300' height='600'></iframe>"></textarea>
+      </div>
+      <div>
+        <label className="block text-sm mb-1">Banner Style</label>
+        <select value={bannerStyle} onChange={e => setBannerStyle(e.target.value)} className="w-full rounded border p-2">
+          <option value="auto">Auto-fit</option>
+          <option value="fixed">Fixed size</option>
+          <option value="responsive">Responsive 16:9</option>
+          <option value="square">Square 1:1</option>
+          <option value="vertical">Vertical (300px max)</option>
+          <option value="horizontal">Horizontal (728px max)</option>
+        </select>
       </div>
       <label className="flex items-center gap-2 text-sm">
         <input type="checkbox" checked={featured} onChange={e => setFeatured(e.target.checked)} /> Featured on Home

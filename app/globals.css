@@ -65,10 +65,26 @@ a:visited { color: #e8e3da; }
 @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
 .animate-bob:hover { animation: bob .5s ease-in-out; }
 
-/* Affiliate embeds - dark mode helpers */
+/* Affiliate embeds - adaptive styles */
 .affiliate img { filter: var(--affiliate-img-filter, none); }
 .dark .affiliate img { --affiliate-img-filter: brightness(0.9) contrast(1.05); }
 .dark .affiliate iframe { filter: brightness(0.9) contrast(1.05); }
+
+/* Banner styles for posts */
+.banner-auto { display: flex; justify-content: center; align-items: center; }
+.banner-auto > * { max-width: 100%; height: auto; }
+
+.banner-fixed { display: flex; justify-content: center; }
+.banner-fixed > * { /* preserve original size */ }
+
+.banner-responsive { position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 8px; }
+.banner-responsive > iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.banner-square { position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; border-radius: 8px; }
+.banner-square > iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.banner-vertical { max-width: 300px; margin: 0 auto; }
+.banner-horizontal { width: 100%; max-width: 728px; margin: 0 auto; }
 
 /* Iframe banners responsive */
 .banner iframe {

@@ -109,7 +109,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
         {/* Right sidebar: vertical banner from post.affiliate_html, fallback to blog_sidebar slot */}
         <aside className="hidden lg:block">
           {post?.affiliate_html ? (
-            <div className="banner sticky top-24" dangerouslySetInnerHTML={{ __html: post.affiliate_html }} />
+            <div className={`banner banner-${post.banner_style || 'vertical'} sticky top-24`} dangerouslySetInnerHTML={{ __html: post.affiliate_html }} />
           ) : (
             <BannerSlot slot="blog_sidebar" className="sticky top-24" />
           )}
