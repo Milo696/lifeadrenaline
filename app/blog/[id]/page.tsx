@@ -78,7 +78,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
               </AnimateIn>
             )}
             <AnimateIn delay={0.1}>
-              <div className="post-card post-content prose lg:prose-lg" style={{background:'rgba(244,237,225,0.06)'}}>
+              <div className="post-card post-content prose prose-invert lg:prose-lg" style={{background:'rgba(244,237,225,0.06)'}}>
                 <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSlug, rehypeAutolinkHeadings]}>
                   {post.content}
                 </ReactMarkdown>
