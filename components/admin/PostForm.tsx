@@ -67,7 +67,23 @@ export default function PostForm({ categories, post }: { categories: { id: strin
       <select value={category} onChange={e => setCategory(e.target.value)} className="w-full rounded border p-2">
         {categories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
       </select>
-      <ReactQuill theme="snow" value={content} onChange={setContent} />
+      <div>
+        <label className="block text-sm mb-1">Content (Markdown + HTML)</label>
+        <textarea 
+          value={content} 
+          onChange={e => setContent(e.target.value)} 
+          className="w-full min-h-[400px] rounded border p-3 font-mono text-sm"
+          placeholder="# Your Title
+
+Games, for example, can be a surprisingly effective way to combine excitement and focus.
+
+<p>In fact, our project offers new players a <strong>welcome bonus of 500&nbsp;USDT 🎁</strong>.</p>
+
+<a href='https://bitxlucky.vip/?promo=START500' target='_blank'>🔥 Claim your 500&nbsp;USDT bonus here</a>
+
+## Gentle vs. Radical Detox"
+        />
+      </div>
       <div>
         <label className="block text-sm mb-1">Featured image</label>
         <input type="file" accept="image/*" onChange={e => setImage(e.target.files?.[0] ?? null)} />
