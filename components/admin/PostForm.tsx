@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { supabaseBrowser } from '@/lib/supabase/client'
+import { useToast } from '@/components/hooks/use-toast'
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css'
@@ -15,6 +16,7 @@ export default function PostForm({ categories, post }: { categories: { id: strin
   const [featured, setFeatured] = useState<boolean>(post?.featured ?? false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const { toast } = useToast()
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,13 +44,16 @@ export default function PostForm({ categories, post }: { categories: { id: strin
       if (post?.id) {
         const { error } = await supabaseBrowser.from('posts').update({ title, content, category, featured_image: featuredUrl, affiliate_html: affiliateHtml, featured }).eq('id', post.id)
         if (error) throw error
+        toast({ title: 'Post updated', description: 'Changes saved successfully.' })
       } else {
         const { error } = await supabaseBrowser.from('posts').insert({ title, content, category, featured_image: featuredUrl, affiliate_html: affiliateHtml, featured })
         if (error) throw error
+        toast({ title: 'Post created', description: 'Your post is published.' })
       }
       window.location.href = '/admin'
     } catch (err: any) {
       setError(err.message || 'Ошибка сохранения')
+      toast({ title: 'Error', description: err.message || 'Failed to save', variant: 'destructive' })
     } finally {
       setSaving(false)
     }

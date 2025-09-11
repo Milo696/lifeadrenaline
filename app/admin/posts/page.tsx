@@ -3,10 +3,12 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { supabaseBrowser } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { useToast } from '@/components/hooks/use-toast'
 
 export default function PostsAdminPage() {
   const router = useRouter()
   const [posts, setPosts] = useState<any[]>([])
+  const { toast } = useToast()
 
   useEffect(() => {
     (async () => {
@@ -18,7 +20,9 @@ export default function PostsAdminPage() {
   }, [router])
 
   const del = async (id: string) => {
-    await supabaseBrowser.from('posts').delete().eq('id', id)
+    const { error } = await supabaseBrowser.from('posts').delete().eq('id', id)
+    if (error) toast({ title: 'Error', description: error.message, variant: 'destructive' })
+    else toast({ title: 'Post deleted' })
     setPosts(list => list.filter(p => p.id !== id))
   }
 

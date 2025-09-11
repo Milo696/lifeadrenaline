@@ -38,7 +38,7 @@ export default async function BlogList({ searchParams }: { searchParams?: { cate
                   <Image src={p.featured_image} alt={p.title} width={800} height={450} className="h-48 w-full rounded-t-[var(--radius)] object-cover" placeholder="blur" blurDataURL="data:image/svg+xml;base64,PHN2Zy8+" />
                 ) : null}
                 <CardBody>
-                  <div className="text-xs uppercase text-gray-500">{p.category}</div>
+                  <div className="mb-1"><span className="inline-block rounded-full border px-2 py-0.5 text-[10px] tracking-wide uppercase text-gray-500">{p.category}</span></div>
                   <div className="mt-1 font-semibold line-clamp-2 group-hover:underline">{p.title}</div>
                   {p.excerpt && <p className="text-sm text-gray-600 line-clamp-2 mt-1">{p.excerpt}</p>}
                 </CardBody>

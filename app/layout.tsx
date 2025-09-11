@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme/ThemeProvider'
+import { Toaster } from '@/components/components/ui/toaster'
 
 export const metadata: Metadata = {
   title: {
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`min-h-screen min-w-full text-gray-100 antialiased adrenaline-bg`}> 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

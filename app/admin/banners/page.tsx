@@ -2,12 +2,14 @@
 import { useEffect, useState } from 'react'
 import { supabaseBrowser } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { useToast } from '@/components/hooks/use-toast'
 
 type Banner = { id: string; slot: string; html: string; active: boolean; weight: number; max_width?: number | null }
 
 export default function BannersAdmin() {
   const router = useRouter()
   const [items, setItems] = useState<Banner[]>([])
+  const { toast } = useToast()
   const [slot, setSlot] = useState('home_top')
   const [html, setHtml] = useState('')
   const [weight, setWeight] = useState(1)
@@ -33,16 +35,22 @@ export default function BannersAdmin() {
       const { data } = await supabaseBrowser.from('banners').select('*').order('created_at', { ascending: false })
       setItems((data as any) || [])
       setHtml('')
+      toast({ title: 'Banner created' })
     }
+    else toast({ title: 'Error', description: error.message, variant: 'destructive' })
   }
 
   const toggle = async (id: string, next: boolean) => {
-    await supabaseBrowser.from('banners').update({ active: next }).eq('id', id)
+    const { error } = await supabaseBrowser.from('banners').update({ active: next }).eq('id', id)
+    if (error) toast({ title: 'Error', description: error.message, variant: 'destructive' })
+    else toast({ title: next ? 'Banner activated' : 'Banner deactivated' })
     setItems((prev) => prev.map(i => i.id === id ? { ...i, active: next } : i))
   }
 
   const remove = async (id: string) => {
-    await supabaseBrowser.from('banners').delete().eq('id', id)
+    const { error } = await supabaseBrowser.from('banners').delete().eq('id', id)
+    if (error) toast({ title: 'Error', description: error.message, variant: 'destructive' })
+    else toast({ title: 'Banner deleted' })
     setItems(items.filter(i => i.id !== id))
   }
 

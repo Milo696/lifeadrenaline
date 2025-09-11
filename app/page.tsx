@@ -39,7 +39,7 @@ export default async function HomePage() {
                     <Image src={p.featured_image} alt={p.title} width={800} height={450} className="h-48 w-full rounded-t-[var(--radius)] object-cover" placeholder="blur" blurDataURL="data:image/svg+xml;base64,PHN2Zy8+" />
                   ) : null}
                   <CardBody>
-                    <div className="text-xs uppercase text-gray-300">{p.category}</div>
+                    <div className="mb-1"><span className="inline-block rounded-full border px-2 py-0.5 text-[10px] tracking-wide uppercase text-gray-300">{p.category}</span></div>
                     <div className="mt-1 font-semibold line-clamp-2 group-hover:underline">{p.title}</div>
                   </CardBody>
                 </Card>

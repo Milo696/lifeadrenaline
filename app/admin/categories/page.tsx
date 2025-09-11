@@ -2,11 +2,13 @@
 import { useEffect, useState } from 'react'
 import { supabaseBrowser } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { useToast } from '@/components/hooks/use-toast'
 
 export default function CategoriesPage() {
   const router = useRouter()
   const [categories, setCategories] = useState<any[]>([])
   const [name, setName] = useState('')
+  const { toast } = useToast()
 
   useEffect(() => {
     (async () => {
@@ -20,14 +22,21 @@ export default function CategoriesPage() {
   const add = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!name) return
-    await supabaseBrowser.from('categories').insert({ name })
+    const { error } = await supabaseBrowser.from('categories').insert({ name })
+    if (error) {
+      toast({ title: 'Error', description: error.message, variant: 'destructive' })
+      return
+    }
+    toast({ title: 'Category added' })
     const { data } = await supabaseBrowser.from('categories').select('id,name').order('name')
     setCategories(data || [])
     setName('')
   }
 
   const del = async (id: string) => {
-    await supabaseBrowser.from('categories').delete().eq('id', id)
+    const { error } = await supabaseBrowser.from('categories').delete().eq('id', id)
+    if (error) toast({ title: 'Error', description: error.message, variant: 'destructive' })
+    else toast({ title: 'Category deleted' })
     setCategories(c => c.filter(x => x.id !== id))
   }
 
