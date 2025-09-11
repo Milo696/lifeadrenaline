@@ -21,6 +21,7 @@ import {
 } from '@/components/components/ui/breadcrumb'
 import { Button } from '@/components/components/ui/button'
 import CommentForm from '@/components/CommentForm'
+import ContentRenderer from '@/components/ContentRenderer'
 import type { Metadata } from 'next'
 import { extractMetaTags } from '@/lib/content-parser'
 
@@ -101,19 +102,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
             )}
             <AnimateIn delay={0.1}>
               <div className="post-card post-content prose prose-invert lg:prose-lg" style={{background:'rgba(244,237,225,0.06)'}}>
-                <ReactMarkdown 
-                  remarkPlugins={[remarkGfm]} 
-                  rehypePlugins={[rehypeRaw, rehypeSlug, rehypeAutolinkHeadings]}
-                  components={{
-                    a: ({ href, children, ...props }) => (
-                      <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
-                        {children}
-                      </a>
-                    )
-                  }}
-                >
-                  {extractMetaTags(post.content || '').cleanContent}
-                </ReactMarkdown>
+                <ContentRenderer content={post.content || ''} />
               </div>
             </AnimateIn>
             <AnimateIn delay={0.15}>
