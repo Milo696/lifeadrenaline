@@ -5,7 +5,7 @@ export function Card({ className, children }: React.PropsWithChildren<{ classNam
   return (
     <div
       className={clsx(
-        'rounded-[12px] bg-[#FBEAD9] text-[#2b1e16] shadow-md transition-transform duration-300 hover:translate-y-1',
+        'rounded-[12px] bg-[#FBEAD9] text-[#2b1e16] shadow-md overflow-hidden transition-transform duration-300 hover:translate-y-1',
         'border border-[var(--border-warm)]',
         className
       )}

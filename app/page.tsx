@@ -32,7 +32,7 @@ export default async function HomePage() {
           {/* Top banner zone: single or row of three */}
           <BannerRow slot="home_top" className="mb-6" />
           <h2 className="text-2xl font-semibold mb-4">Featured ideas for a cozy day</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {posts?.map((p) => (
               <Link key={p.id} href={`/blog/${p.id}`} className="block group">
                 <Card className="card-modern">

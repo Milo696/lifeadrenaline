@@ -12,7 +12,7 @@ import { Button } from '@/components/components/ui/button'
 
 export default function Header() {
   return (
-    <header className="border-b bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:bg-gray-900/70">
+    <header className="bg-[#F5E8C7]/90 backdrop-blur supports-[backdrop-filter]:bg-[#F5E8C7]/80 border-b border-[var(--border-warm)]">
       <Container className="py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <AdrenalineLogo />
