@@ -17,6 +17,10 @@ export default function LikeButton({ postId }: { postId: string }) {
       await fetch('/api/likes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ post_id: postId }) })
       setCount(c => c + 1)
       setLiked(true)
+      // Track event
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'like_post', { post_id: postId })
+      }
     } finally {
       setLoading(false)
     }
